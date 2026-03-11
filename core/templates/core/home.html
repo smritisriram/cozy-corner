@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="view active">
+  <div class="welcome-area">
+    <div class="welcome-content">
+      <h1>Welcome to your cozy corner{% if profile %}, {{ profile.display_name }}{% endif %}.</h1>
+      <p>This is a calm space where you can study, build habits, journal your thoughts, and grow at your own pace.</p>
+      <div class="welcome-illustration">
+        <div class="dumpling-placeholder"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dumpling-guide" id="dumpling-guide">
+    <div class="dumpling-speech">
+      <div class="dumpling-avatar"></div>
+      <div class="speech-bubble">
+        <p>Hi! I'm your dumpling buddy.</p>
+        <p>I'll help guide you around Cozy Corner. You can rename me anytime!</p>
+        <p class="hint">Try the icons above: Journal, Chat, and Account.</p>
+        <button class="btn-soft" id="close-dumpling-guide">Got it!</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="motto-section">
+    <div class="motto-circle">
+      <div class="dumpling-mascot"></div>
+      <span>Your buddy</span>
+    </div>
+    <div class="motto-circle">
+      <div class="books-illustration"></div>
+      <span>Study & grow</span>
+    </div>
+  </div>
+
+  <div class="divider">
+    <span>—</span><span class="dot">•</span><span>—</span><span class="dot">•</span><span>—</span><span class="dot">•</span><span>—</span>
+  </div>
+
+  <div class="carousel-section">
+    <h2>Explore Cozy Corner</h2>
+    <div class="carousel">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <div class="slide-illustration courses-icon"></div>
+          <h3>Study Courses</h3>
+          <p>Learn at your own pace with topic-based lessons in Math, Science, History, and more.</p>
+          <a href="{% url 'core:courses' %}" class="btn-soft">Start Learning</a>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-illustration exams-icon"></div>
+          <h3>Practice Exams</h3>
+          <p>Build confidence with timed practice tests in a calm, simulated environment.</p>
+          <a href="{% url 'core:exams' %}" class="btn-soft">Try Practice Exam</a>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-illustration habits-icon"></div>
+          <h3>Habit Tracker</h3>
+          <p>Build sustainable habits with gentle tracking and streak celebration.</p>
+          <a href="{% url 'core:habits' %}" class="btn-soft">Track Habits</a>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-illustration journal-icon"></div>
+          <h3>Cozy Journal</h3>
+          <p>Express yourself with a creative space for writing, stickers, and reflections.</p>
+          <a href="{% url 'core:journal' %}" class="btn-soft">Open Journal</a>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-illustration chat-icon"></div>
+          <h3>Dumpling Chat</h3>
+          <p>Get encouragement, study help, and a friendly ear whenever you need it.</p>
+          <a href="{% url 'core:chat' %}" class="btn-soft">Chat with Dumpling</a>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="carousel-dots"></div>
+  </div>
+</section>
+
+{% load static %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

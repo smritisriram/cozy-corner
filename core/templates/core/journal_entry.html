@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Journal Entry{% endblock %}
+{% block content %}
+<div class="view-header">
+  <a href="{% url 'core:journal' %}" class="btn-back">← Back</a>
+  <h2>Journal — {{ entry.created_at|date:"M d, Y" }}</h2>
+</div>
+<div class="journal-container">
+  <div class="journal-sidebar">
+    <a href="{% url 'core:journal_new' %}" class="btn-soft">+ New Entry</a>
+    <div class="journal-entries-list">
+      {% for e in entries %}
+      <a href="{% url 'core:journal_entry' e.pk %}" class="journal-entry-item {% if e.pk == entry.pk %}active{% endif %}">{{ e.created_at|date:"M d, Y" }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="journal-editor">
+    <div class="journal-toolbar">
+      <button type="button" class="tool-btn" id="add-text" title="Add text">T</button>
+      <button type="button" class="tool-btn" id="add-sticker" title="Add sticker">★</button>
+      <button type="button" class="tool-btn" id="add-mood" title="Mood">😊</button>
+    </div>
+    <div class="journal-page" id="journal-page">
+      <div contenteditable="true" class="journal-text-area" id="journal-content" data-entry-id="{{ entry.pk }}">{{ entry.content|safe }}</div>
+    </div>
+  </div>
+</div>
+{% load static %}
+<script>
+  window.JOURNAL_ENTRY_ID = {{ entry.pk }};
+  window.JOURNAL_SAVE_URL = "{% url 'core:journal_save' entry.pk %}";
+  window.CSRF_TOKEN = "{{ csrf_token }}";
+</script>
+<script src="{% static 'js/journal.js' %}"></script>
+{% endblock %}

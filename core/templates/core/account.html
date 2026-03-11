@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Account{% endblock %}
+{% block content %}
+<div class="view-header">
+  <a href="{% url 'core:home' %}" class="btn-back">← Back</a>
+  <h2>Account</h2>
+</div>
+<div class="account-container">
+  <form method="post">
+    {% csrf_token %}
+    <div class="account-section">
+      <h3>Profile</h3>
+      <div class="account-form">
+        <label><span>Name</span>{{ form.name }}</label>
+        <label><span>Birthday</span>{{ form.birthday }}</label>
+        <label><span>Age</span>{{ form.age }}</label>
+        <label><span>Gender</span>{{ form.gender }}</label>
+      </div>
+    </div>
+    <div class="account-section">
+      <h3>Theme Colors</h3>
+      <div class="theme-picker">
+        <label><span>Primary</span>{{ form.theme_primary }}</label>
+        <label><span>Secondary</span>{{ form.theme_secondary }}</label>
+      </div>
+    </div>
+    <div class="account-section">
+      <h3>Progress</h3>
+      <div class="progress-stats">
+        <div class="stat"><span class="stat-value">{{ habit_streak }}</span><span class="stat-label">Habit Streak</span></div>
+        <div class="stat"><span class="stat-value">{{ journal_count }}</span><span class="stat-label">Journal Entries</span></div>
+        <div class="stat"><span class="stat-value">{{ profile.exams_completed }}</span><span class="stat-label">Exams Completed</span></div>
+      </div>
+    </div>
+    <button type="submit" class="btn-soft">Save Changes</button>
+  </form>
+</div>
+<p style="margin-top:1rem;font-size:0.9rem;color:var(--text-light);">Username for login: <code>{{ user.username }}</code></p>
+<p style="margin-top:0.5rem;"><a href="{% url 'core:logout' %}" class="btn-soft">Log Out</a></p>
+{% endblock %}

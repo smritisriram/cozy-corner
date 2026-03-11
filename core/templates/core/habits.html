@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Habit Tracker{% endblock %}
+{% block content %}
+<div class="view-header">
+  <a href="{% url 'core:home' %}" class="btn-back">← Back</a>
+  <h2>Habit Tracker</h2>
+</div>
+<div class="habits-container">
+  <div class="add-habit-section">
+    <form method="post" action="{% url 'core:habit_add' %}" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;flex:1;">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Add a new habit..." required style="flex:1;min-width:150px;">
+      <div class="habit-color-picker">
+        <button type="button" class="color-option selected" data-color="#8B9A7A" style="background:#8B9A7A"></button>
+        <button type="button" class="color-option" data-color="#C4A77D" style="background:#C4A77D"></button>
+        <button type="button" class="color-option" data-color="#9B8B7A" style="background:#9B8B7A"></button>
+        <button type="button" class="color-option" data-color="#7A9B8B" style="background:#7A9B8B"></button>
+        <button type="button" class="color-option" data-color="#B8A88B" style="background:#B8A88B"></button>
+      </div>
+      <input type="hidden" name="color" id="habit-color-input" value="#8B9A7A">
+      <button type="submit" class="btn-soft">Add Habit</button>
+    </form>
+  </div>
+  <div class="habits-list">
+    {% for habit in habits %}
+    <div class="habit-item">
+      <div class="habit-color" style="background:{{ habit.color }}"></div>
+      <span class="habit-name">{{ habit.name }}</span>
+      <span class="habit-streak">{{ habit.streak }} day streak</span>
+      <div class="habit-actions">
+        <form method="post" action="{% url 'core:habit_toggle' habit.pk %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn-soft">{{ habit.completed_today|yesno:"Undo,Done" }}</button>
+        </form>
+        <form method="post" action="{% url 'core:habit_delete' habit.pk %}" style="display:inline;" onsubmit="return confirm('Remove this habit?');">
+          {% csrf_token %}
+          <button type="submit" class="btn-soft">Remove</button>
+        </form>
+      </div>
+    </div>
+    {% empty %}
+    <p style="color:var(--text-light);">Add a habit to get started!</p>
+    {% endfor %}
+  </div>
+  <div class="habit-calendar-section">
+    <h3>Your Streaks</h3>
+    <div class="streak-display">
+      {% for habit in habits %}
+      <div class="streak-item">{{ habit.name }}: {{ habit.streak }} days</div>
+      {% empty %}
+      <p style="color:var(--text-light);font-size:0.9rem;">Complete habits to build streaks!</p>
+      {% endfor %}
+    </div>
+    <div class="mini-calendar">
+      {% for day in calendar_days %}
+      <div class="calendar-day {% if day.completed %}completed{% endif %} {% if day.today %}today{% endif %}">{{ day.label }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% load static %}
+<script src="{% static 'js/habits.js' %}"></script>
+{% endblock %}

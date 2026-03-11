@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Study Courses{% endblock %}
+{% block content %}
+<div class="view-header">
+  <a href="{% url 'core:home' %}" class="btn-back">← Back</a>
+  <h2>Study Courses</h2>
+</div>
+<div class="courses-grid">
+  {% for subject, topics in topics.items %}
+  <div class="course-card">
+    <div class="course-icon">{% if subject == 'math' %}∑{% elif subject == 'history' %}📜{% elif subject == 'science' %}🔬{% else %}📖{% endif %}</div>
+    <h3>{% if subject == 'math' %}Math{% elif subject == 'history' %}History / Social Studies{% elif subject == 'science' %}Science{% else %}Reading & Writing{% endif %}</h3>
+    <p>{{ topics|join:", " }}</p>
+    <a href="{% url 'core:course_topics' subject %}" class="btn-soft">Explore</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

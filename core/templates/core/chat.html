@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Dumpling Chat{% endblock %}
+{% block content %}
+<div class="view-header">
+  <a href="{% url 'core:home' %}" class="btn-back">← Back</a>
+  <h2>Dumpling Chat</h2>
+</div>
+<div class="chat-container">
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-message dumpling-message">
+      <div class="dumpling-avatar-small"></div>
+      <div class="message-bubble">
+        <p>Hi there! I'm your dumpling buddy. I'm here to encourage you, help with studying, or just listen. What's on your mind?</p>
+      </div>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <textarea id="chat-input" placeholder="Type a message..." rows="2"></textarea>
+    <button class="btn-soft btn-primary" id="chat-send">Send</button>
+  </div>
+  <div class="chat-footer">
+    <a href="#" id="report-problem">Report Problem / Suggest Feature</a>
+  </div>
+</div>
+{% load static %}
+<script>
+  window.CHAT_MESSAGE_URL = "{% url 'core:chat_message' %}";
+  window.CSRF_TOKEN = "{{ csrf_token }}";
+</script>
+<script src="{% static 'js/chat.js' %}"></script>
+{% endblock %}

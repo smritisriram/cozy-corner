@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Cozy Corner{% endblock %} — Keep Calm & Cozy On</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+    :root {
+      --sage: {{ theme_primary|default:'#8B9A7A' }};
+      --brown: {{ theme_secondary|default:'#C4A77D' }};
+    }
+  </style>
+</head>
+<body>
+  {% if user.is_authenticated %}
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="{% url 'core:home' %}" class="app-name">Cozy Corner</a>
+    </div>
+    <div class="nav-center">
+      <span class="tagline">Keep Calm & Cozy On</span>
+    </div>
+    <div class="nav-right">
+      <a href="{% url 'core:journal' %}" class="nav-icon" title="Journal" aria-label="Open Journal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          <path d="M8 7h8"/><path d="M8 11h8"/>
+        </svg>
+      </a>
+      <a href="{% url 'core:chat' %}" class="nav-icon" title="Dumpling Chat" aria-label="Open Dumpling Chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="9" cy="10" r="1.5" fill="currentColor"/>
+          <circle cx="15" cy="10" r="1.5" fill="currentColor"/>
+          <path d="M8 15c1.5 2 4.5 2 6 0"/>
+        </svg>
+      </a>
+      <a href="{% url 'core:account' %}" class="nav-icon" title="Account" aria-label="Open Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/>
+          <path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/>
+          <path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+  {% endif %}
+
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

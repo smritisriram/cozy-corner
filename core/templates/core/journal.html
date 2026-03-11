@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Cozy Journal{% endblock %}
+{% block content %}
+<div class="view-header">
+  <a href="{% url 'core:home' %}" class="btn-back">← Back</a>
+  <h2>Cozy Journal</h2>
+</div>
+<div class="journal-container">
+  <div class="journal-sidebar">
+    <a href="{% url 'core:journal_new' %}" class="btn-soft">+ New Entry</a>
+    <div class="journal-entries-list">
+      {% for entry in entries %}
+      <a href="{% url 'core:journal_entry' entry.pk %}" class="journal-entry-item">{{ entry.created_at|date:"M d, Y" }}</a>
+      {% empty %}
+      <p style="color:var(--text-light);font-size:0.9rem;">No entries yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="journal-editor">
+    <p class="journal-placeholder">Click "New Entry" to start journaling, or select an existing entry from the list.</p>
+  </div>
+</div>
+{% endblock %}

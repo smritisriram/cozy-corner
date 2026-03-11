@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ subject_name }}{% endblock %}
+{% block content %}
+<div class="view-header">
+  <a href="{% url 'core:courses' %}" class="btn-back">← Back</a>
+  <h2>{{ subject_name }}</h2>
+</div>
+<div class="topics-list">
+  {% for topic in topics %}
+  <div class="topic-item">
+    <span>{{ topic }}</span>
+    <span>→</span>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
