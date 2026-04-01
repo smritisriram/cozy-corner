@@ -5,19 +5,23 @@
   <a href="{% url 'core:home' %}" class="btn-back">← Back</a>
   <h2>Cozy Journal</h2>
 </div>
-<div class="journal-container">
-  <div class="journal-sidebar">
-    <a href="{% url 'core:journal_new' %}" class="btn-soft">+ New Entry</a>
+<div class="journal-book-wrap">
+  <aside class="journal-sidebar journal-spine" aria-label="Past entries">
+    <a href="{% url 'core:journal_new' %}" class="btn-soft btn-primary journal-new-btn">+ New entry</a>
+    <p class="journal-spine-title">Pages</p>
     <div class="journal-entries-list">
       {% for entry in entries %}
-      <a href="{% url 'core:journal_entry' entry.pk %}" class="journal-entry-item">{{ entry.created_at|date:"M d, Y" }}</a>
+      <a href="{% url 'core:journal_entry' entry.pk %}" class="journal-entry-item">
+        <span class="journal-entry-date">{{ entry.created_at|date:"M j, Y" }}</span>
+        <span class="journal-entry-preview">{% if entry.content|striptags %}{{ entry.content|striptags|truncatewords:14 }}{% else %}Empty page…{% endif %}</span>
+      </a>
       {% empty %}
-      <p style="color:var(--text-light);font-size:0.9rem;">No entries yet.</p>
+      <p class="journal-empty-note">No pages yet. Start with a new entry.</p>
       {% endfor %}
     </div>
-  </div>
-  <div class="journal-editor">
-    <p class="journal-placeholder">Click "New Entry" to start journaling, or select an existing entry from the list.</p>
+  </aside>
+  <div class="journal-editor journal-cover-open">
+    <p class="journal-placeholder">Choose <strong>New entry</strong> to open a fresh page, or pick a date from the list — your journal stays yours.</p>
   </div>
 </div>
 {% endblock %}

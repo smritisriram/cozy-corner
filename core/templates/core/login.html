@@ -4,7 +4,8 @@
 <div class="auth-page">
   <div class="auth-card">
     <h1>Welcome back</h1>
-    <p>Log in to continue to Cozy Corner.</p>
+    <p>Log in with your username and password — or continue as a guest without signing up.</p>
+    <p class="auth-guest"><a href="{% url 'core:home' %}" class="btn-soft">Continue as guest</a></p>
     <form method="post" class="auth-form">
       {% csrf_token %}
       {% for field in form %}
@@ -33,5 +34,8 @@
 .auth-form button { width: 100%; margin-top: 0.5rem; }
 .auth-footer { margin-top: 1rem; font-size: 0.9rem; color: var(--text-light); }
 .auth-footer a { color: var(--sage); }
+.auth-guest { margin-bottom: 1.25rem; text-align: center; }
+.auth-guest .btn-soft { display: inline-block; }
+.auth-form { margin-top: 0.5rem; }
 </style>
 {% endblock %}

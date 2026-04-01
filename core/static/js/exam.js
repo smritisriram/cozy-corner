@@ -72,11 +72,15 @@
   }
   function finishExam() {
     if (timerInterval) clearInterval(timerInterval);
-    let correct = 0;
-    examQuestions.forEach(function(q, i) { if (answers[i] === q.correct) correct++; });
     const total = examQuestions.length;
-    const pct = Math.round((correct / total) * 100);
-    alert('Exam complete!\n\nYou got ' + correct + ' out of ' + total + ' correct (' + pct + '%).\n\nThis is a supportive space — every attempt helps you build confidence. Keep practicing!');
+    if (window.EXAM_PRACTICE_MODE) {
+      alert('Practice round complete.\n\nNo grades here — just you showing up. That already counts. Take a breath and be kind to yourself.');
+    } else {
+      let correct = 0;
+      examQuestions.forEach(function(q, i) { if (answers[i] === q.correct) correct++; });
+      const pct = Math.round((correct / total) * 100);
+      alert('Exam complete!\n\nYou got ' + correct + ' out of ' + total + ' correct (' + pct + '%).\n\nThis is a supportive space — every attempt helps you build confidence. Keep practicing!');
+    }
     fetch(completeUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrfToken },

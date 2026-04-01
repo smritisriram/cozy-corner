@@ -7,16 +7,16 @@
       <h1>Welcome to your cozy corner{% if profile %}, {{ profile.display_name }}{% endif %}.</h1>
       <p>This is a calm space where you can study, build habits, journal your thoughts, and grow at your own pace.</p>
       <div class="welcome-illustration">
-        <div class="dumpling-placeholder"></div>
+        <div class="dumpling-placeholder" aria-hidden="true"><span class="dumpling-emoji-lg">🥟</span></div>
       </div>
     </div>
   </div>
 
   <div class="dumpling-guide" id="dumpling-guide">
     <div class="dumpling-speech">
-      <div class="dumpling-avatar"></div>
+      <div class="dumpling-avatar" aria-hidden="true"><span class="dumpling-emoji">🥟</span></div>
       <div class="speech-bubble">
-        <p>Hi! I'm your dumpling buddy.</p>
+        <p>Hi! I'm Dumpling, your little buddy.</p>
         <p>I'll help guide you around Cozy Corner. You can rename me anytime!</p>
         <p class="hint">Try the icons above: Journal, Chat, and Account.</p>
         <button class="btn-soft" id="close-dumpling-guide">Got it!</button>
@@ -26,7 +26,7 @@
 
   <div class="motto-section">
     <div class="motto-circle">
-      <div class="dumpling-mascot"></div>
+      <div class="dumpling-mascot" aria-hidden="true"><span class="dumpling-emoji-md">🥟</span></div>
       <span>Your buddy</span>
     </div>
     <div class="motto-circle">
@@ -51,9 +51,10 @@
         </div>
         <div class="carousel-slide">
           <div class="slide-illustration exams-icon"></div>
-          <h3>Practice Exams</h3>
-          <p>Build confidence with timed practice tests in a calm, simulated environment.</p>
-          <a href="{% url 'core:exams' %}" class="btn-soft">Try Practice Exam</a>
+          <h3>Practice &amp; study</h3>
+          <p>Timed practice, a no-grade exam mode, or a topic workspace with gentle questions — your choice.</p>
+          <a href="{% url 'core:exams' %}" class="btn-soft">Practice exams</a>
+          <a href="{% url 'core:study' %}" class="btn-soft" style="margin-left:0.5rem;">Study workspace</a>
         </div>
         <div class="carousel-slide">
           <div class="slide-illustration habits-icon"></div>

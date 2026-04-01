@@ -15,7 +15,7 @@
     if (!text) return;
     const userMsg = document.createElement('div');
     userMsg.className = 'chat-message user-message';
-    userMsg.innerHTML = '<div class="dumpling-avatar-small" style="background:var(--sage);"></div><div class="message-bubble"><p>' + escapeHtml(text) + '</p></div>';
+    userMsg.innerHTML = '<div class="dumpling-avatar-small user-avatar" aria-hidden="true"><span class="dumpling-emoji">☺</span></div><div class="message-bubble"><p>' + escapeHtml(text) + '</p></div>';
     messages.appendChild(userMsg);
     input.value = '';
     messages.scrollTop = messages.scrollHeight;
@@ -27,7 +27,7 @@
     }).then(function(r) { return r.json(); }).then(function(data) {
       const dumplingMsg = document.createElement('div');
       dumplingMsg.className = 'chat-message dumpling-message';
-      dumplingMsg.innerHTML = '<div class="dumpling-avatar-small"></div><div class="message-bubble"><p>' + escapeHtml(data.reply || "I'm here for you!") + '</p></div>';
+      dumplingMsg.innerHTML = '<div class="dumpling-avatar-small" aria-hidden="true"><span class="dumpling-emoji">🥟</span></div><div class="message-bubble"><p>' + escapeHtml(data.reply || "I'm here for you!") + '</p></div>';
       messages.appendChild(dumplingMsg);
       messages.scrollTop = messages.scrollHeight;
     });

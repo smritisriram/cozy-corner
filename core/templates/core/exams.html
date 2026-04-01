@@ -6,7 +6,7 @@
   <h2>Practice Exams</h2>
 </div>
 <div class="exam-setup">
-  <p>Simulate a real exam environment with a timer and calm atmosphere.</p>
+  <p>Simulate a real exam environment with a timer and calm atmosphere — or try a low-pressure practice round with no scores.</p>
   <form method="get" action="{% url 'core:exam_active' %}">
     <div class="exam-options">
       <label>
@@ -28,7 +28,14 @@
         </select>
       </label>
     </div>
-    <button type="submit" class="btn-soft btn-primary">Start Practice Exam</button>
+    <div class="exam-actions-row">
+      <button type="submit" class="btn-soft btn-primary">Start timed practice</button>
+      <button type="submit" class="btn-soft" name="mode" value="practice">Practice exam (no grades)</button>
+    </div>
   </form>
+  <div class="exam-study-link">
+    <p>Have a specific topic in mind?</p>
+    <a href="{% url 'core:study' %}" class="btn-soft">Open study &amp; practice workspace</a>
+  </div>
 </div>
 {% endblock %}

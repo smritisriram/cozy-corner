@@ -5,18 +5,22 @@
   <a href="{% url 'core:journal' %}" class="btn-back">← Back</a>
   <h2>Journal — {{ entry.created_at|date:"M d, Y" }}</h2>
 </div>
-<div class="journal-container">
-  <div class="journal-sidebar">
-    <a href="{% url 'core:journal_new' %}" class="btn-soft">+ New Entry</a>
+<div class="journal-book-wrap">
+  <aside class="journal-sidebar journal-spine" aria-label="Past entries">
+    <a href="{% url 'core:journal_new' %}" class="btn-soft btn-primary journal-new-btn">+ New entry</a>
+    <p class="journal-spine-title">Pages</p>
     <div class="journal-entries-list">
       {% for e in entries %}
-      <a href="{% url 'core:journal_entry' e.pk %}" class="journal-entry-item {% if e.pk == entry.pk %}active{% endif %}">{{ e.created_at|date:"M d, Y" }}</a>
+      <a href="{% url 'core:journal_entry' e.pk %}" class="journal-entry-item {% if e.pk == entry.pk %}active{% endif %}">
+        <span class="journal-entry-date">{{ e.created_at|date:"M j, Y" }}</span>
+        <span class="journal-entry-preview">{% if e.content|striptags %}{{ e.content|striptags|truncatewords:12 }}{% else %}Empty page…{% endif %}</span>
+      </a>
       {% endfor %}
     </div>
-  </div>
-  <div class="journal-editor">
+  </aside>
+  <div class="journal-editor journal-page-open">
     <div class="journal-toolbar">
-      <button type="button" class="tool-btn" id="add-text" title="Add text">T</button>
+      <button type="button" class="tool-btn" id="add-text" title="Add text block">T</button>
       <button type="button" class="tool-btn" id="add-sticker" title="Add sticker">★</button>
       <button type="button" class="tool-btn" id="add-mood" title="Mood">😊</button>
     </div>

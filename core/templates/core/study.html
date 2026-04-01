@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Study &amp; Practice{% endblock %}
+{% block content %}
+<div class="view-header">
+  <a href="{% url 'core:exams' %}" class="btn-back">← Back</a>
+  <h2>Study &amp; Practice</h2>
+</div>
+<p class="study-intro">Type a topic or paste short notes. Cozy Corner will give a simple explanation and a few gentle questions — no pressure, just practice.</p>
+<div class="study-workspace">
+  <div class="study-input-card">
+    <label for="study-topic" class="study-label">Topic or notes</label>
+    <textarea id="study-topic" rows="4" placeholder="e.g. photosynthesis, fractions, the Bill of Rights…"></textarea>
+    <button type="button" class="btn-soft btn-primary" id="study-generate">Generate study pack</button>
+  </div>
+  <div class="study-output study-output--hidden" id="study-output">
+    <div class="study-explanation-card">
+      <h3>Simple explanation</h3>
+      <p id="study-explanation-text"></p>
+    </div>
+    <div class="study-practice-card">
+      <h3>Practice (no grades)</h3>
+      <p class="study-practice-hint">Pick what feels right. This is only for you — no score, just feedback.</p>
+      <div id="study-practice-area"></div>
+      <button type="button" class="btn-soft btn-primary study-hidden" id="study-practice-next">Next</button>
+      <p class="study-encouragement study-hidden" id="study-encouragement"></p>
+    </div>
+  </div>
+</div>
+{% load static %}
+<script>
+  window.STUDY_GENERATE_URL = "{% url 'core:study_generate' %}";
+  window.CSRF_TOKEN = "{{ csrf_token }}";
+</script>
+<script src="{% static 'js/study.js' %}"></script>
+{% endblock %}
